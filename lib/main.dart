@@ -12,20 +12,7 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-      MultiProvider(
-        providers: [
-          Provider<AuthService>(
-              create: (_)=>AuthService()
-          ),
-          ChangeNotifierProvider<AuthController>(
-              create: (context)=>AuthController()
-          ),
-          StreamProvider<UserModel?>(
-              create: (context)=>context.read<AuthService>().user,
-              initialData: null),
-        ],
-        child: MyApp(),
-      ),
+      MyApp(),
   );
 }
 
@@ -35,14 +22,27 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
+    return MultiProvider(
+      providers: [
+        Provider<AuthService>(
+            create: (_)=>AuthService()
+        ),
+        ChangeNotifierProvider<AuthController>(
+            create: (context)=>AuthController()
+        ),
+        StreamProvider<UserModel?>(
+            create: (context)=>context.read<AuthService>().user,
+            initialData: null),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
 
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: Splashscreen(),
       ),
-      home: Splashscreen(),
     );
   }
 }

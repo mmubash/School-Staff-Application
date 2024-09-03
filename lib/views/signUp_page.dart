@@ -11,6 +11,7 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final GlobalKey<FormState>validateEmpty =GlobalKey<FormState>();
   final TextEditingController _fNameController = TextEditingController();
   final TextEditingController _lNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -25,120 +26,130 @@ class _SignupPageState extends State<SignupPage> {
       ),
       body: SingleChildScrollView(
 
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 35,right: 35),
-                child: SizedBox(
-                  width: 300,
-                  child: TextFormField(
-                    controller: _fNameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)
-                      ),
-                      hintText: "First Name",
-                      label: Text("First Name"),
-                    ),
-                  ),
-                ),
-              ),// First Name Text Form Field
-              SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.only(left: 35,right: 35),
-                child: SizedBox(
-                  width: 300,
-                  child: TextFormField(
-                    controller: _lNameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)
-                      ),
-                      hintText: "Last Name",
-                      label: Text("Last Name"),
-                    ),
-                  ),
-                ),
-              ),//Last Name Text Form Field
-              SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.only(left: 35,right: 35),
-                child: SizedBox(
-                  width: 300,
-                  child: TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)
-                      ),
-                      hintText: "Email",
-                      label: Text("Email"),
-                    ),
-                  ),
-                ),
-              ),//Email Text Form Field
-              SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.only(left: 35,right: 35),
-                child: SizedBox(
-                  width: 300,
-                  child: TextFormField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)
-                      ),
-                      hintText: "Password",
-                      label: Text("Password"),
-                      suffixIcon: Icon(Icons.remove_red_eye),
-                    ),
-                  ),
-                ),
-              ),//Password Text Form Field
-              SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.only(left: 35,right: 35),
-                child: SizedBox(
-                  width: 300,
-                  child: TextFormField(
-                    controller: _conPasswordController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)
-                      ),
-                      hintText: "Confirm Password",
-                      label: Text("Confirm Password"),
-                      suffixIcon: Icon(Icons.remove_red_eye),
-                    ),
-                  ),
-                ),
-              ),//Confirm Password Text Form Field
-              SizedBox(height: 40),
-              ElevatedButton(
-                  style: ButtonStyle(
-                  ),
-                  onPressed: () async {
-                       final authController = Provider.of<AuthController>(context,listen: false);
-                       final result = await authController.signUp(_fNameController.text,_lNameController.text,_emailController.text,_passwordController.text);
+        child: Form(
+          key:validateEmpty,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 35,right: 35),
+                  child: SizedBox(
+                    width: 300,
+                    child: TextFormField(
 
-                       if (result == 'Sign up successful') {
-                         ScaffoldMessenger.of(context).showSnackBar(
-                           SnackBar(content: Text("Account created Successfully")),
-                         );
+                      controller: _fNameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30)
+                        ),
+                        hintText: "First Name",
+                        label: Text("First Name"),
+                      ),
+                    ),
+                  ),
+                ),// First Name Text Form Field
+                SizedBox(height: 40),
+                Padding(
+                  padding: const EdgeInsets.only(left: 35,right: 35),
+                  child: SizedBox(
+                    width: 300,
+                    child: TextFormField(
+                      controller: _lNameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30)
+                        ),
+                        hintText: "Last Name",
+                        label: Text("Last Name"),
+                      ),
+                    ),
+                  ),
+                ),//Last Name Text Form Field
+                SizedBox(height: 40),
+                Padding(
+                  padding: const EdgeInsets.only(left: 35,right: 35),
+                  child: SizedBox(
+                    width: 300,
+                    child: TextFormField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30)
+                        ),
+                        hintText: "Email",
+                        label: Text("Email"),
+                      ),
+                    ),
+                  ),
+                ),//Email Text Form Field
+                SizedBox(height: 40),
+                Padding(
+                  padding: const EdgeInsets.only(left: 35,right: 35),
+                  child: SizedBox(
+                    width: 300,
+                    child: TextFormField(
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30)
+                        ),
+                        hintText: "Password",
+                        label: Text("Password"),
+                        suffixIcon: Icon(Icons.remove_red_eye),
+                      ),
+                    ),
+                  ),
+                ),//Password Text Form Field
+                SizedBox(height: 40),
+                Padding(
+                  padding: const EdgeInsets.only(left: 35,right: 35),
+                  child: SizedBox(
+                    width: 300,
+                    child: TextFormField(
+                      controller: _conPasswordController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30)
+                        ),
+                        hintText: "Confirm Password",
+                        label: Text("Confirm Password"),
+                        suffixIcon: Icon(Icons.remove_red_eye),
+                      ),
+                    ),
+                  ),
+                ),//Confirm Password Text Form Field
+                SizedBox(height: 40),
+                ElevatedButton(
+                    style: ButtonStyle(
+                    ),
+                    onPressed: () async {
+                            // AuthController().isloading();
 
-                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-                       } else {
-                         // Show error message
-                         ScaffoldMessenger.of(context).showSnackBar(
-                           SnackBar(content: Text(result)),
-                         );
-                       }
-                       },
+                            
+                         final authController = Provider.of<AuthController>(context,listen: false);
+                         final result = await authController.signUp(_fNameController.text,_lNameController.text,_emailController.text,_passwordController.text);
+                         authController.isloading();
+                         print(AuthController().loading);
+                         if (result == 'Sign up successful') {
+                           ScaffoldMessenger.of(context).showSnackBar(
+                             SnackBar(content: Text("Account created Successfully")),
+                           );
 
-                  child: Text("Sign Up"))
-            ],
+                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                         } else {
+                           // Show error message
+                           ScaffoldMessenger.of(context).showSnackBar(
+                             SnackBar(content: Text(result)),
+                           );
+                         }
+                         },
+
+                    child:
+                    AuthController().loading?CircularProgressIndicator():
+                    Text("Sign Up"))
+              ],
+            ),
           ),
         ),
       ),

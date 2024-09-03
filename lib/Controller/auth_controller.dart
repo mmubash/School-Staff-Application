@@ -5,8 +5,14 @@ import '../models/userModel.dart';
 
 class AuthController with ChangeNotifier{
  final AuthService _authService =AuthService();
+ bool loading =false;
  UserModel? _user;
  UserModel? get user => _user;
+ bool get _loading => loading;
+ isloading(){
+   loading = !_loading;
+   notifyListeners();
+ }
 Stream<UserModel?> get userStream=> _authService.user;
 Future<void> signIn(String email ,String password)async{
    _user=await _authService.signInWithEmailAndPassword(email, password);
