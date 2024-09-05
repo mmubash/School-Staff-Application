@@ -13,4 +13,16 @@
 11- Add "Already have and account? Sing In " text in signUp Screen as you added in sing In screen(Y)
 12- complete this signIn And signUp With firebase after that just create design just UI of Application no need firebase any more for now.
 
-NOTE: Please do these chanegs and inform me after done 
+NOTE: Please do these changes and inform me after done
+
+***************************** TASK ****************************
+2024-Sep-05 (THURSDAY)
+1- Remove SetState From Entire Project & shift this in provider state management.(Y)
+2- confirm Password validation didn't work. i give different password and confirm password it didn't give me error. add Validation.(y)
+3- Length of password should be grater then 6 add this validation too in SignUp screen.(y)
+4- color Of snack-bar in error is not red give it red color for error and green for successfully.(Y)
+5- Add background Like figma even it's image OR color scheme.(Y)
+6- first time or by default hide password of text form field.(Y)
+7- add Password hide and show functionality when click on eye.(Y)
+8- make design of both screen same as figma design with background.(Y)
+9- after Login when i click back button it comes back to login page. fix this too. it didn't come back on login screen after login until he/she didn't logout account(Y)

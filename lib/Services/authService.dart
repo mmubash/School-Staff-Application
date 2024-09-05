@@ -2,28 +2,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:school_staff/models/userModel.dart';
 
-class AuthService{
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  UserModel? _userFromFirebase(User? user){
-    return user !=null? UserModel(uId:user.uid,email: user.email):null;
+class AuthService {
+  FirebaseAuth _auth =FirebaseAuth.instance;
+  UserModel? userFromFirebase(User? user){
+    return user!=null? UserModel(email: user.email):null;
   }
-
   Stream<UserModel?> get user{
-    return _auth.authStateChanges().map(_userFromFirebase);
+    return _auth.authStateChanges().map(userFromFirebase);
   }
-
-  Future signInWithEmailAndPassword(String email, String password)async{
-    try{
-     UserCredential result= await _auth.signInWithEmailAndPassword(email:email,password:password);
-     User? user=result.user;
-     return _userFromFirebase(user);
-    }
-    catch(e){
+  Future signIn(String email,String password)async{
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      User? user = result.user;
+      return userFromFirebase(user);
+    }catch(e){
       print (e.toString());
       return null;
     }
   }
-
   Future createUserWithEmailAndPassword(String fName,String lName,String email,String password )async{
     try{
       UserCredential result = await _auth.createUserWithEmailAndPassword(email:email,password:password);
@@ -33,7 +29,7 @@ class AuthService{
         'lastName':lName,
         'email':email,
       });
-       return _userFromFirebase(user);
+      return userFromFirebase(user);
     }catch(e){
       print (e.toString());
       return'Error: ${e.toString()}';
@@ -49,6 +45,5 @@ class AuthService{
       return null;
     }
   }
-
 
 }

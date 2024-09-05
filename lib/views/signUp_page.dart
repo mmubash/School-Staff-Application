@@ -25,226 +25,274 @@ class _SignupPageState extends State<SignupPage> {
     return Scaffold(
       body: Form(
         key: validateEmpty,
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  Row(
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left:320,right: 0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(bottomLeft:Radius.circular(800),),
+                  color: Color(0xFFAB5EDC),
+                ),
+                height: 100,
+                width: 100,
+              ),
+            ),
+            SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
                     children: [
-                      IconButton(
-                        icon: Icon(Icons.arrow_back),
-                          onPressed: (){
-                            Navigator.pop(context);
-                          },
-                      ),
-                      SizedBox(width: 10,),
-                      Text("Sign Up",style: GoogleFonts.inter(fontSize: 30,color:Color(0xFFAB5EDC) ),),
-                    ],
-                  ),
-                  SizedBox(height: 20,),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 35, right: 35,bottom: 0),
-                    child: SizedBox(
-                      width: 300,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null||value.isEmpty) {
-                            return "Enter First Name";
-                          }
-                          return null;
-                        },
-                        controller: _fNameController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          hintText: "First Name",
-                          label: Text("First Name"),
-                        ),
-                      ),
-                    ),
-                  ), // First Name Text Form Field
-                  SizedBox(height: 40),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 35, right: 35,bottom: 0),
-                    child: SizedBox(
-                      width: 300,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null||value.isEmpty) {
-                            return "Enter Last Name";
-                          }
-                        },
-                        controller: _lNameController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          hintText: "Last Name",
-                          label: Text("Last Name"),
-                        ),
-                      ),
-                    ),
-                  ), //Last Name Text Form Field
-                  SizedBox(height: 40),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 35, right: 35,bottom: 0),
-                    child: SizedBox(
-                      width: 300,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null||value.isEmpty) {
-                            return "Enter Email";
-                          }
-                          return null;
-                        },
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          hintText: "Email",
-                          label: Text("Email"),
-                        ),
-                      ),
-                    ),
-                  ), //Email Text Form Field
-                  SizedBox(height: 40),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 35, right: 35,bottom: 0),
-                    child: SizedBox(
-                      width: 300,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null||value.isEmpty) {
-                            return "Enter Password";
-                          }
-                          return null;
-                        },
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          hintText: "Password",
-                          label: Text("Password"),
-                          suffixIcon: Icon(Icons.remove_red_eye),
-                        ),
-                      ),
-                    ),
-                  ), //Password Text Form Field
-                  SizedBox(height: 40),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 35, right: 35,bottom: 0),
-                    child: SizedBox(
-                      width: 300,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null||value.isEmpty) {
-                            return "Enter Confirm Password";
-                          }
-                          return null;
-                        },
-                        controller: _conPasswordController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          hintText: "Confirm Password",
-                          label: Text("Confirm Password"),
-                          suffixIcon: Icon(Icons.remove_red_eye),
-                        ),
-                      ),
-                    ),
-                  ), //Confirm Password Text Form Field
-                  SizedBox(height: 40),
-                  Consumer<AuthController>(
-                    builder: (context, AuthController, child) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 70),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFFAB5EDC),
-                            foregroundColor: Colors.white,
-                            minimumSize: Size(230, 50),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.arrow_back),
+                              onPressed: (){
+                                Navigator.pop(context);
+                              },
                           ),
-                          onPressed: ()  async {
-                            if (validateEmpty.currentState!.validate()) {
-                              AuthController.isloading(true);
-                              await AuthController.signUp(
-                                  _fNameController.text, _lNameController.text,
-                                  _emailController.text,
-                                  _passwordController.text);
-                              print(AuthController.loading);
+                          SizedBox(width: 10,),
+                          Text("Sign Up",style: GoogleFonts.inter(fontSize: 30,color:Color(0xFFAB5EDC) ),),
+                        ],
+                      ),
+                      SizedBox(height: 20,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 35, right: 35,bottom: 0),
+                        child: SizedBox(
+                          width: 300,
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null||value.isEmpty) {
+                                return "Enter First Name";
+                              }
+                              return null;
+                            },
+                            controller: _fNameController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              hintText: "First Name",
+                              label: Text("First Name"),
+                            ),
+                          ),
+                        ),
+                      ), // First Name Text Form Field
+                      SizedBox(height: 40),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 35, right: 35,bottom: 0),
+                        child: SizedBox(
+                          width: 300,
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null||value.isEmpty) {
+                                return "Enter Last Name";
+                              }
+                            },
+                            controller: _lNameController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              hintText: "Last Name",
+                              label: Text("Last Name"),
+                            ),
+                          ),
+                        ),
+                      ), //Last Name Text Form Field
+                      SizedBox(height: 40),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 35, right: 35,bottom: 0),
+                        child: SizedBox(
+                          width: 300,
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null||value.isEmpty) {
+                                return "Enter Email";
+                              }
+                            },
+                            controller: _emailController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              hintText: "Email",
+                              label: Text("Email"),
+                            ),
+                          ),
+                        ),
+                      ), //Email Text Form Field
+                      SizedBox(height: 40),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 35, right: 35,bottom: 0),
+                        child: SizedBox(
+                          width: 300,
+                          child: Consumer<AuthController>(
+                              builder: (context, AuthController, child) {
 
-                              if (AuthController.user != null) {
-                                try {
+                                return TextFormField(
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Enter Password";
+                                    }else if(value.length<7){
+                                      return"Password must be greater then 6 characters";
+                                    }
+
+                                  },
+                                  obscureText:AuthController.hide,
+                                  controller: _passwordController,
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              30)),
+                                      hintText: "Password",
+                                      label: const Text("Password"),
+                                      suffixIcon: InkWell(
+                                        onTap: AuthController.isHide,
+                                        child: Icon(
+                                          AuthController.hide?Icons.visibility_off:Icons.visibility,
+                                        ),
+                                      )
+                                  ),
+                                );
+
+                              }
+
+                          ),
+                        ),
+                      ), //Password Text Form Field
+                      SizedBox(height: 40),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 35, right: 35,bottom: 0),
+                        child: SizedBox(
+                          width: 300,
+                          child: Consumer<AuthController>(
+                              builder: (context, AuthController, child) {
+
+                                return TextFormField(
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Enter Confirm Password";
+                                    }else if(value!=_passwordController.text){
+                                      return"Confirm Password does not match";
+                                    }
+                                    return null;
+
+                                  },
+                                  obscureText:AuthController.conPasswordHide,
+                                  controller: _conPasswordController,
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              30)),
+                                      hintText: "Confirm Password",
+                                      label: const Text("Confirm Password"),
+                                      suffixIcon: InkWell(
+                                        onTap: AuthController.isConPasswordHide,
+                                        child: Icon(
+                                          AuthController.conPasswordHide?Icons.visibility_off:Icons.visibility,
+                                        ),
+                                      )
+                                  ),
+                                );
+                              }
+                          ),
+                        ),
+                      ), //Confirm Password Text Form Field
+                      SizedBox(height: 40),
+                      Consumer<AuthController>(
+                        builder: (context, AuthController, child) {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 70),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFFAB5EDC),
+                                foregroundColor: Colors.white,
+                                minimumSize: Size(230, 50),
+                              ),
+                              onPressed: ()  async {
+                                if (validateEmpty.currentState!.validate()) {
+                                  AuthController.isloading(true);
+                                    try {
+                                      await AuthController.signUp(
+                                          _fNameController.text, _lNameController.text,
+                                          _emailController.text,
+                                          _passwordController.text);
+                                      Navigator.pop(context);
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          backgroundColor: Colors.green,
+                                            content:
+                                            Text("Signed up Successfully")),
+                                      );
+
+                                      AuthController.isloading(false);
+                                    } catch (e) {
+                                     await ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            backgroundColor: Colors.red,
+                                            content: Text(e.toString())),
+                                      );
+                                      AuthController.isloading(false);
+                                    }
+
+                                }
+                              },
+                                child: AuthController.loading?CircularProgressIndicator(color: Colors.white,):Text("Sign Up"),
+
+                            ),
+                          );
+                        },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 55),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Already Have an Account ?",
+                              style: GoogleFonts.inter(),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Provider.of<AuthController>(context,listen: false).isHide();
+                                  Provider.of<AuthController>(context,listen: false).isConPasswordHide();
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => LoginPage()));
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content:
-                                        Text("Signed up Successfully")),
-                                  );
-
-                                  AuthController.isloading(false);
-                                } catch (e) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(e.toString())),
-                                  );
-                                } finally {
-                                  AuthController.isloading(false);
-                                }
-                              } else {
-                                AuthController.isloading(false);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text("Invalid input"),
+                                },
+                                child: Text(
+                                  "Sign In",
+                                  style: GoogleFonts.inter(
+                                    decoration: TextDecoration.underline,
                                   ),
-                                );
-                              }
-                            }
-                          },
-                            child: AuthController.loading?CircularProgressIndicator():Text("Sign Up"),
+                                ))
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
 
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 55),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Already Have an Account ?",
-                          style: GoogleFonts.inter(),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginPage()));
-                            },
-                            child: Text(
-                              "Sign In",
-                              style: GoogleFonts.inter(
-                                decoration: TextDecoration.underline,
-                              ),
-                            ))
-                      ],
-                    ),
-                  )
-                ],
-              ),
             ),
           ),
+            Padding(
+              padding: const EdgeInsets.only(left:0,right: 320,top: 800),
+              child: Container(
+                height: 100,
+                width: 100,
+                decoration: (BoxDecoration(
+                  color: Color(0xFFAB5EDC),
+                  borderRadius: BorderRadius.only(topRight:Radius.circular(800),),
+                )),
+              ),
+            )
+          ]
         ),
       ),
     );
