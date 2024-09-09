@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:school_staff/views/auth_wrapper.dart';
+import 'package:school_staff/views/Authentication/auth_wrapper.dart';
 
     class Splashscreen extends StatefulWidget {
       const Splashscreen({super.key});
