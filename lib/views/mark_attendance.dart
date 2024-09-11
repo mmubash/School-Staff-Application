@@ -90,12 +90,12 @@ class MarkAttendance extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
-                itemCount: 6,
+                itemCount: 16,
                 itemBuilder: (context, index) {
                   return Container(
                     width: 110,
                     height: 70,
-                    margin: EdgeInsets.only(bottom:  10),
+                    margin: EdgeInsets.only(bottom:  20),
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(

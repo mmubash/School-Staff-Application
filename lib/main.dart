@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:school_staff/Controller/auth_controller.dart';
+import 'package:school_staff/Controller/dropdownbuttons.dart';
 import 'package:school_staff/views/splashScreen.dart';
 import 'Services/authService.dart';
 import 'firebase_options.dart';
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<AuthController>(
             create: (context)=>AuthController()
+        ),
+        ChangeNotifierProvider<DropDownMethods>(
+            create: (context)=>DropDownMethods(),
         ),
         StreamProvider<UserModel?>(
             create: (context)=>context.read<AuthService>().user,

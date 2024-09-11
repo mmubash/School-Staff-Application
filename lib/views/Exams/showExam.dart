@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:school_staff/Controller/dropdownbuttons.dart';
-import 'package:school_staff/views/Class%20Test/createTest.dart';
-import 'package:school_staff/views/home_page.dart';
-class ShowClassTest extends StatelessWidget {
-  const ShowClassTest({super.key});
+import 'package:school_staff/views/Exams/createExam.dart';
+
+class ShowExam extends StatelessWidget {
+  const ShowExam({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +19,14 @@ class ShowClassTest extends StatelessWidget {
           child: Row(
             children: [
               GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
-                },
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
                   child: Icon(Icons.close,color: Colors.white,)),
               SizedBox(
                 width: 5,
               ),
-              Text("Class Test",style: GoogleFonts.inter(color: Colors.white),),
+              Text("Exam",style: GoogleFonts.inter(color: Colors.white),),
             ],
           ),
         ),
@@ -37,7 +37,7 @@ class ShowClassTest extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateTest()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateExam()));
               },
               child: Container(
                 height: 40,
@@ -60,7 +60,7 @@ class ShowClassTest extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Create Test",style: GoogleFonts.inter(color: Colors.white,fontWeight: FontWeight.bold),),
+                        Text("Create Exam",style: GoogleFonts.inter(color: Colors.white,fontWeight: FontWeight.bold),),
                         Icon(Icons.arrow_forward_ios_outlined,color: Colors.white),
                       ],
                     ),
@@ -77,7 +77,7 @@ class ShowClassTest extends StatelessWidget {
                       builder: (context,value,child) {
                         return Container(
                           height: 50,
-                          width: 150,
+                          width: 122,
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.black54),
                             boxShadow: [
@@ -91,7 +91,7 @@ class ShowClassTest extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(10),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton(
                                 value: value.selectedSection,
@@ -106,7 +106,7 @@ class ShowClassTest extends StatelessWidget {
                                   child: FittedBox(
                                     fit: BoxFit.cover,
                                     child: Text(
-                                      "Class Section",
+                                      "Class ",
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 50.0,
@@ -127,55 +127,108 @@ class ShowClassTest extends StatelessWidget {
                 ),
                 GestureDetector(
                   child: Consumer<DropDownMethods>(
-                    builder: (context,value,child) {
-                      return Container(
-                        height: 50,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black54),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 1,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              value: value.selectedSubject,
+                      builder: (context,value,child) {
+                        return Container(
+                          height: 50,
+                          width: 126,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black54),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 1,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton(
+                                value: value.selectedSubject,
                                 icon: Icon(Icons.arrow_drop_down),
                                 items: value.subjectTypes.map<DropdownMenuItem<String>>((String value){
                                   return DropdownMenuItem<String>(
-                                      value: value,
+                                    value: value,
                                     child: Text(value),
                                   );
-                            }).toList(),
-                              hint:const  Center(
-                                child: FittedBox(
-                                  fit: BoxFit.contain,
-                                  child: Text(
-                                    "Subject type",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 40.0,
-                                      fontFamily: 'Arial',
+                                }).toList(),
+                                hint:const  Center(
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: Text(
+                                      "Subject ",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 40.0,
+                                        fontFamily: 'Arial',
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
                                 onChanged: (String? v){
-                                value.setSubject(v);
+                                  value.setSubject(v);
                                 },
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }
+                        );
+                      }
+                  ),
+                ),
+                GestureDetector(
+                  child: Consumer<DropDownMethods>(
+                      builder: (context,value,child) {
+                        return Container(
+                          height: 50,
+                          width: 126,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black54),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 1,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton(
+                                value: value.selectedExam,
+                                icon: Icon(Icons.arrow_drop_down),
+                                items: value.examTypes.map<DropdownMenuItem<String>>((String value){
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                hint:const  Center(
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: Text(
+                                      "Exam",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 40.0,
+                                        fontFamily: 'Arial',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                onChanged: (String? v){
+                                  value.setExamType(v);
+                                },
+                              ),
+                            ),
+                          ),
+                        );
+                      }
                   ),
                 ),
 
@@ -256,7 +309,8 @@ class ShowClassTest extends StatelessWidget {
               ),
             ),
           ],
-        ),
+
+      ),
       ),
     );
   }

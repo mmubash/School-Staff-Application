@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:school_staff/views/Assignments/showAssignments.dart';
 import 'package:school_staff/views/Authentication/login_page.dart';
 import 'package:school_staff/views/Class%20Test/showClassTest.dart';
+import 'package:school_staff/views/Exams/showExam.dart';
 import 'package:school_staff/views/mark_attendance.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -87,14 +89,14 @@ List chartData=[
                 leading: Icon(Icons.create_outlined),
                 title: Text('Assignment',style: GoogleFonts.inter(color: Colors.white)),
                 onTap: () {
-
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ShowAssignments()));
                 },
               ),
               ListTile(
                 leading: Icon(Icons.school_outlined),
                 title: Text('Exams',style: GoogleFonts.inter(color: Colors.white)),
                 onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ShowExam()));
 
                 },
               ),
