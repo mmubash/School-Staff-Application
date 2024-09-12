@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:school_staff/views/Attendance/view_Attendance.dart';
 class MarkAttendance extends StatelessWidget {
   MarkAttendance({super.key});
   @override
@@ -64,6 +65,9 @@ class MarkAttendance extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
+                  onTap: (){
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=>ViewAttendance()));
+                  },
                   child: Container(
                     height: 20,
                     width: 80,

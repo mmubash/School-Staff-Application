@@ -6,10 +6,12 @@ import 'package:school_staff/views/Assignments/showAssignments.dart';
 import 'package:school_staff/views/Authentication/login_page.dart';
 import 'package:school_staff/views/Class%20Test/showClassTest.dart';
 import 'package:school_staff/views/Exams/showExam.dart';
-import 'package:school_staff/views/mark_attendance.dart';
+import 'package:school_staff/views/Attendance/mark_attendance.dart';
+import 'package:school_staff/views/timeTable.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../Controller/auth_controller.dart';
+import 'Attendance/view_Attendance.dart';
 
 class HomePage extends StatelessWidget {
    HomePage({super.key});
@@ -28,7 +30,6 @@ List chartData=[
         backgroundColor: Color(0xFFAB5EDC),
       ),
       drawer:  Drawer(
-
         backgroundColor: Color(0xFFAB5EDC),
         child: Stack(
            children: [
@@ -104,7 +105,7 @@ List chartData=[
                 leading: Icon(Icons.calendar_month_sharp),
                 title: Text('TimeTable',style: GoogleFonts.inter(color: Colors.white)),
                 onTap: () {
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Timetable()));
                 },
               ),
 
@@ -151,10 +152,10 @@ List chartData=[
               child: SizedBox(
               height: 350,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center, // Center align the content
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 4.0), // Reduced padding
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
                     child: Text(
                       "Attendance",
                       style: GoogleFonts.inter(
