@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:school_staff/Controller/delete_container.dart';
 import 'package:school_staff/Controller/dropdownbuttons.dart';
 import 'package:school_staff/views/Class%20Test/createTest.dart';
 import 'package:school_staff/views/home_page.dart';
+
+
 class ShowClassTest extends StatelessWidget {
   const ShowClassTest({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     final List<Color> colors = [Color(0xFFD397EF), Color(0xFFE49359),Color(0xFFB0C9FB),];
     return Scaffold(
       appBar: AppBar(
@@ -182,78 +186,84 @@ class ShowClassTest extends StatelessWidget {
               ],
             ),
             SizedBox(height: 40,),
-            Expanded(
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: 6,
-                itemBuilder: (context, index) {
+            Consumer<DeleteContainer>(
+              builder: (context,value,child){
+              return Expanded(
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: value.combinedList.length ,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: 200,
+                      width: 300,
+                      margin: EdgeInsets.only(bottom: 20),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.red.withOpacity(0.5),
+                              spreadRadius: 3,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(40) ),
+                          color: colors[index%colors.length]
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Row(
+                                children:[
+                                  Image.asset("assets/live.png"),
+                                  SizedBox(width: 10,),
+                                  Text('${value.combinedList[index]['Test']}',
+                                      style: GoogleFonts.inter(fontWeight:FontWeight.w700,color:Colors.black),),
+                                ]
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 33),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text("${value.combinedList[index]['Subject']}",style: GoogleFonts.inter(fontWeight:FontWeight.w400,color:Colors.black),),
+                                Text("${value.combinedList[index]['Class']}",style: GoogleFonts.inter(fontWeight:FontWeight.w400,color:Colors.black),),
+                                Text("${value.combinedList[index]['Date']}",style: GoogleFonts.inter(fontWeight:FontWeight.w400,color:Colors.black),),
+                                Text("Attachment",style: GoogleFonts.inter(fontWeight:FontWeight.w400,color:Colors.black),),
+                                Divider(color: Colors.white,),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child:  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Icon(Icons.check_circle_outline,),
+                                      Text("Enter Result",style: GoogleFonts.inter(color: Colors.white),),
+                                      Icon(Icons.message),
+                                      Text("Publish",style: GoogleFonts.inter(color: Colors.white),),
+                                      GestureDetector(
+                                        onTap: (){
+                                          value.combinedList.removeAt(index);
+                                          print("******* item Deleted");
+                                        },
+                                          child: Icon(Icons.delete_outline_outlined,)),
+                                      Text("Delete",style: GoogleFonts.inter(color: Colors.white),),
 
-                  return Container(
-                    height: 200,
-                    width: 300,
-                    margin: EdgeInsets.only(bottom: 20),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 3,
-                            offset: Offset(0, 3),
+
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ],
-                        borderRadius: BorderRadius.only(topRight: Radius.circular(40) ),
-                        color: colors[index%colors.length]
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
-                              children:[
-                                Image.asset("assets/live.png"),
-                                SizedBox(width: 10,),
-                                Text("Heading",style: GoogleFonts.inter(fontWeight:FontWeight.w700,color:Colors.black),),
-                              ]
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 33),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text("XII Rose",style: GoogleFonts.inter(fontWeight:FontWeight.w400,color:Colors.black),),
-                              Text("English",style: GoogleFonts.inter(fontWeight:FontWeight.w400,color:Colors.black),),
-                              Text("22/4/2024",style: GoogleFonts.inter(fontWeight:FontWeight.w400,color:Colors.black),),
-                              Text("Attachment",style: GoogleFonts.inter(fontWeight:FontWeight.w400,color:Colors.black),),
-                              Divider(color: Colors.white,),
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child:  Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Icon(Icons.check_circle_outline,),
-                                    Text("Enter Result",style: GoogleFonts.inter(color: Colors.white),),
-                                    Icon(Icons.message),
-
-                                    Text("Publish",style: GoogleFonts.inter(color: Colors.white),),
-                                    Icon(Icons.delete_outline_outlined,),
-
-                                    Text("Delete",style: GoogleFonts.inter(color: Colors.white),),
-
-
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+                      ),
+                    );
+                  },
+                ),
+              );}
             ),
           ],
         ),

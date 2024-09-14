@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:school_staff/Controller/dropdownbuttons.dart';
 import 'package:table_calendar/table_calendar.dart';
 class Timetable extends StatelessWidget {
   const Timetable({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +30,23 @@ class Timetable extends StatelessWidget {
 
               children: [
                 Card(
-                  child: TableCalendar(
-                    firstDay: DateTime.utc(2020, 10, 20),
-                    lastDay: DateTime.utc(2030, 3, 20),
-                    focusedDay: DateTime.now(),
+                  child: Consumer<DropDownMethods>(
+                    builder: (context,value,child){
+                      return TableCalendar(
+                        firstDay: DateTime.utc(2020, 10, 20),
+                        lastDay: DateTime.utc(2030, 3, 20),
+                        focusedDay: DateTime.now(),
+                        selectedDayPredicate: (day) {
+                          return isSameDay(value.selectedDay, day);
+                        },
+                        onDaySelected: (selectDay,focusDay){
+                          value.setDay(selectDay, focusDay);
+                        },
+                        // onPageChanged: (focusedDay){
+                        //   value.setFocus(focusedDay);
+                        // },
+                      );
+                    },
                   ),
                 ),
                 SizedBox(
